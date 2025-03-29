@@ -2,8 +2,16 @@
 
 import { motion } from "framer-motion"
 import { Button } from "../ui/button"
+import Image, { type StaticImageData } from "next/image"
+import { ReactElement } from "react"
 
-const projects = [
+interface Project {
+  title: string
+  description: string
+  image: string | StaticImageData
+}
+
+const projects: Project[] = [
   {
     title: "Residential Complex",
     description: "A modern residential development with sustainable features.",
@@ -21,7 +29,7 @@ const projects = [
   }
 ]
 
-export function Works() {
+export default function Works(): ReactElement {
   return (
     <section className="bg-gray-50 py-20">
       <div className="container">
@@ -39,7 +47,7 @@ export function Works() {
         </motion.div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, index) => (
+          {projects.map((project: Project, index: number) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 20 }}
@@ -48,11 +56,14 @@ export function Works() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group overflow-hidden rounded-lg shadow-lg transition-all hover:shadow-xl"
             >
-              <div className="h-64 overflow-hidden">
-                <img
+              <div className="h-64 overflow-hidden relative">
+                <Image
                   src={project.image}
                   alt={project.title}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={index < 2}
                 />
               </div>
               <div className="bg-white p-6">
