@@ -26,7 +26,7 @@ export function Hero() {
           </p>
           <div className="flex gap-4">
             <Button size="lg">Our Services</Button>
-            <Button size="lg" variant="outline" className="text-white">
+            <Button size="lg" variant="outline" className="text-black">
               Contact Us
             </Button>
           </div>
